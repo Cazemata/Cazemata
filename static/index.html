@@ -1,27 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Phaser Template</title>
-	<link rel="stylesheet" href="styles/main.css">
+    <meta charset="UTF-8">
 
-	<link rel="manifest" href="manifest.json">
-
-	<script>
-	if (navigator.serviceWorker) {
-	  navigator.serviceWorker.register('service-worker.js')
-	    .then(function(){
-	    	console.log('service worker installed');
-	    })
-	    .catch(function(err){
-	    	console.log('Error', err);
-	    });
-	}
-	</script>
-	
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(function(){
+                    console.log('service worker installed');
+                })
+                .catch(function(err){
+                    console.log('Error', err);
+                });
+        }
+    </script>
 </head>
 <body>
-	<script src="scripts/phaser.min.js"></script>
-	<script src="scripts/game.js"></script>
+<div class="page">
+    <div class="header">
+        <div class="logo">LOGO</div>
+        <div>BUTTON1</div>
+        <div>BUTTON2</div>
+        <div>BUTTON3</div>
+        <div>BUTTON4</div>
+        <div>MENU</div>
+    </div>
+    <div class="top_bar">
+        <div>TOP_BAR</div>
+    </div>
+    <div class="left_bar">
+        <div>L_BAR</div>
+    </div>
+    <div id="content">
+        <div></div>
+    </div>
+    <div class="right_bar">
+        <div>R_BAR</div>
+    </div>
+    <div class="bottom_bar">
+        <div>BOTTOM_BAR</div>
+    </div>
+    <div class="footer">
+        <div>FOOTER</div>
+    </div>
+    <div class="rest">
+        <div>REST</div>
+    </div>
+</div>
+<script src="scripts/phaser.min.js"></script>
+<script src="scripts/game.js"></script>
 </body>
 </html>

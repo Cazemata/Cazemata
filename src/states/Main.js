@@ -1,5 +1,6 @@
 //import ExampleObject from 'objects/ExampleObject';
 import DayCycle from 'objects/DayCycle';
+import Weather from 'objects/Weather';
 
 class Main extends Phaser.State {
 
@@ -8,18 +9,30 @@ class Main extends Phaser.State {
 		//Enable Arcade Physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-		//Set the games background colour
+        //Set the games background colour
 		this.game.stage.backgroundColor = '#000';
 
+		//Day-night cycle length
 		this.dayCycle = new DayCycle(this.game, 10000);
 
+		//Add weather
+        this.weather = new Weather(this.game);
+
+        this.controls = this.input.keyboard.addKeys({
+            'key1': Phaser.KeyCode.ONE,
+            'key2': Phaser.KeyCode.TWO
+        });
+
+		//Adding bitmapData to var
 		let bgBitMap = this.game.add.bitmapData(this.game.width, this.game.height);
 
+		//Var properties
 		bgBitMap.ctx.rect(0, 0, this.game.width, this.game.height);
 		bgBitMap.ctx.fillStyle = '#dbddda';
 		bgBitMap.ctx.fill();
 
-        this.backgroundSprite = this.game.add.sprite(0, 0, bgBitMap);
+        //Adds bg sprite - not visible atm.
+		this.backgroundSprite = this.game.add.sprite(0, 0, bgBitMap);
 
 		//Example of including an object
 		//let exampleObject = new ExampleObject(this.game);
@@ -57,6 +70,11 @@ class Main extends Phaser.State {
         this.man = this.game.add.sprite(this.game.width / 4,
             this.game.height - this.game.cache.getImage('man').height, 'man');
 
+        //Add rain & fog
+        this.weather.addRain();
+        //this.weather.addFog();
+
+        //Array to tween all layers from: to:
         let backgroundSprites = [
             {sprite: this.backgroundSprite, from: 0x1f2a27, to: 0xB2DDC8},
             {sprite: this.back, from: 0x000000, to: 0xbcba8b},
@@ -66,6 +84,7 @@ class Main extends Phaser.State {
             {sprite: this.man, from: 0x2a0f0f, to:0xbcba8b}
         ];
 
+        //Initialise DayCycle, pass sprites
         this.dayCycle.initShading(backgroundSprites);
         this.dayCycle.initSun(this.sunSprite);
         this.dayCycle.initMoon(this.moonSprite);
@@ -81,8 +100,17 @@ class Main extends Phaser.State {
 	    this.mid1.tilePosition.x -= 0.75;
 	    this.man.position.x -= 1;
         //Reset character position on x coordinate once it exits the screen
-	    if (this.man.position.x < -600) this.man.position.x = 1800;
-	}
+	    if (this.man.position.x < (this.game.width - (this.game.width + this.man.width)))
+	        this.man.position.x = this.game.width;
+
+	    //Rain toggle
+        if (this.controls.key1.isDown)
+            this.weather.emitter.on = false;// & this.weather.removeFog();
+        if (this.controls.key2.isDown)
+            this.weather.emitter.on = true;// & this.weather.addFog();
+        //if (this.weather.emitter.on = false && this.controls.key1.isUp) this.weather.emitter.on = true;
+
+    }
 
 }
 

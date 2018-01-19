@@ -1,15 +1,158 @@
-html {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
+body {
+    margin: 0;
 }
 
-body {
-  height: inherit;
-  width: inherit;
-  margin: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.page {
+    display: grid;
+    grid-template: 50px 50px minmax(400px, auto) 100px 50px / 100px repeat(10, 1fr) 100px;
+    grid-template-areas: "h h h h h h h h h h h h"
+    "l t t t t t t t t t t r"
+    "l c c c c c c c c c c r"
+    "l b b b b b b b b b b r"
+    "f f f f f f f f f f f f"
+}
+
+.page > div {
+    height: 100%;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.header {
+    position: relative;
+    margin: 0;
+    grid-area: h;
+    background-color: black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    display: flex;
+}
+
+.top_bar {
+    position: relative;
+    margin: 0;
+    grid-area: t;
+    background-color: beige;
+    color: black !important;
+    justify-content: center;
+    display: none !important;
+}
+
+.header > div:nth-child(6) {
+    margin-left: auto;
+}
+
+.header :nth-child(2) {
+    padding: 0 40px;
+}
+
+.header :nth-child(4) {
+    padding: 0 40px;
+}
+
+.logo {
+    font-size: 2em !important;
+}
+
+.left_bar {
+    grid-area: l;
+    background-color: gray;
+    justify-content: center;
+    z-index: 1;
+    display: none !important;
+}
+
+.right_bar {
+    grid-area: r;
+    background-color: gray;
+    justify-content: center;
+    z-index: 1;
+    display: none !important;
+}
+
+#content {
+    grid-column-start: l-start;
+    grid-column-end: r-end;
+    grid-row-start: t-start;
+    grid-row-end: b-end;
+    background-color: black;
+    justify-content: center;
+    padding: 0 !important;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bottom_bar {
+    position: relative;
+    grid-area: b;
+    background-color: beige;
+    color: black !important;
+    justify-content: center;
+    z-index: 1;
+    display: none !important;
+}
+
+.footer {
+    position: relative;
+    grid-area: f;
+    background-color: black;
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    z-index: 2;
+}
+
+@media screen and (max-width: 480px) {
+
+    .page {
+        grid-template: 50px minmax(400px, auto) 75px 50px / repeat(6, 1fr);
+        grid-template-areas: "t t t t t t"
+        "l c c c c r"
+        "b b b b b b"
+        "h h h h h h"
+    }
+
+    .page > div {
+        padding: 10px;
+    }
+
+    .left_bar {
+        grid-area: l;
+    }
+
+
+    .header {
+        grid-area: h;
+        box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .content {
+        color: black !important;
+        grid-column-start: l-start;
+        grid-column-end: r-end;
+        grid-row-start: t-start;
+        grid-row-end: b-end;
+        background-color: white;
+        justify-content: center;
+    }
+
+    .header :nth-child(2) {
+        padding: 0 20px 0 0;
+    }
+
+    .header :nth-child(4) {
+        padding: 0 20px;
+    }
+
+    .footer {
+        display: none !important;
+    }
+
+    .logo {
+        display: none;
+    }
 }
