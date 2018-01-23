@@ -27,6 +27,32 @@ class Weather {
 
     }
 
+    addSnow() {
+
+        let snowParticle = this.game.add.bitmapData(15, 15);
+
+        snowParticle.circle(0, 0, 15, 'rgb(255,255,255)');
+
+        this.emitter = this.game.add.emitter(this.game.world.centerX, -300, 400);
+
+        this.emitter.width = this.game.world.width;
+
+        this.emitter.makeParticles(snowParticle);
+
+        this.emitter.minParticleScale = 0.2;
+        this.emitter.maxParticleScale = 0.4;
+
+        this.emitter.minParticleAlpha = 0.2;
+        this.emitter.maxParticleAlpha = 0.4;
+
+        this.emitter.setYSpeed(100, 300);
+        this.emitter.gravity = 0;
+        this.emitter.minRotation = 0;
+        this.emitter.maxRotation = 40;
+
+        this.emitter.start(false, 7000, 5, 0);
+    }
+
     addRain() {
 
         let rainParticle = this.game.add.bitmapData(15, 50);
@@ -64,7 +90,7 @@ class Weather {
         this.emitter.start(false, 1600, 5, 0);
     }
 
-    removeRain() {
+    removeEmitter() {
 
         this.emitter.kill();
 

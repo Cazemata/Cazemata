@@ -5,7 +5,7 @@ class Boot extends Phaser.State {
 	}
 
 	create() {
-		this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+		this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
 		this.game.state.start("Preload");
 	}
 

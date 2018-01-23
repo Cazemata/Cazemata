@@ -3,6 +3,7 @@ body {
 }
 
 .page {
+    height: 100%;
     display: grid;
     grid-template: 50px 50px minmax(400px, auto) 100px 50px / 100px repeat(10, 1fr) 100px;
     grid-template-areas: "h h h h h h h h h h h h"
@@ -13,7 +14,6 @@ body {
 }
 
 .page > div {
-    height: 100%;
     color: white;
     font-size: 14px;
     font-weight: 500;
@@ -40,7 +40,6 @@ body {
     background-color: beige;
     color: black !important;
     justify-content: center;
-    display: none !important;
 }
 
 .header > div:nth-child(6) {
@@ -64,7 +63,6 @@ body {
     background-color: gray;
     justify-content: center;
     z-index: 1;
-    display: none !important;
 }
 
 .right_bar {
@@ -72,19 +70,17 @@ body {
     background-color: gray;
     justify-content: center;
     z-index: 1;
-    display: none !important;
 }
 
 #content {
+    color: black !important;
     grid-column-start: l-start;
     grid-column-end: r-end;
     grid-row-start: t-start;
     grid-row-end: b-end;
-    background-color: black;
+    background-color: white;
     justify-content: center;
     padding: 0 !important;
-    height: 100%;
-    overflow: hidden;
 }
 
 .bottom_bar {
@@ -94,7 +90,6 @@ body {
     color: black !important;
     justify-content: center;
     z-index: 1;
-    display: none !important;
 }
 
 .footer {
@@ -130,7 +125,7 @@ body {
         box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.5) !important;
     }
 
-    .content {
+    #content {
         color: black !important;
         grid-column-start: l-start;
         grid-column-end: r-end;

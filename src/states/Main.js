@@ -3,8 +3,10 @@ import DayCycle from 'objects/DayCycle';
 import Weather from 'objects/Weather';
 
 class Main extends Phaser.State {
-
 	create() {
+
+	    //Enable advanced timing for FPS counter
+	    this.game.time.advancedTiming = true;
 
 		//Enable Arcade Physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -22,6 +24,13 @@ class Main extends Phaser.State {
             'key1': Phaser.KeyCode.ONE,
             'key2': Phaser.KeyCode.TWO
         });
+
+        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.input.onDown.add(goFull, this);
+
+        function goFull() {
+            self.game.scale.startFullScreen();
+        }
 
 		//Adding bitmapData to var
 		let bgBitMap = this.game.add.bitmapData(this.game.width, this.game.height);
@@ -72,6 +81,7 @@ class Main extends Phaser.State {
 
         //Add rain & fog
         this.weather.addRain();
+        this.weather.addSnow();
         //this.weather.addFog();
 
         //Array to tween all layers from: to:
@@ -88,10 +98,43 @@ class Main extends Phaser.State {
         this.dayCycle.initShading(backgroundSprites);
         this.dayCycle.initSun(this.sunSprite);
         this.dayCycle.initMoon(this.moonSprite);
+        let self = this;
+        // setInterval(function(){
+        //     self.weather.emitter.on = !self.weather.emitter.on;
+        //     console.log(self.weather.emitter.on);
+        // },5000);
+
+        this.toggleRain(self);
+        this.toggleSnow(self);
 
     }
 
+        toggleSnow(self) {
+            let timer = this.getRandomInt({min: 5000, max: 10000});
+            setTimeout(function(){
+                self.weather.emitter.on = !self.weather.emitter.on;
+                self.toggleRain(self);
+            }, timer);
+        }
+
+
+        toggleRain(self){
+	        let timer = this.getRandomInt({min: 5000, max: 20000});
+	        setTimeout(function(){
+                self.weather.emitter.on = !self.weather.emitter.on;
+                self.toggleRain(self);
+            }, timer);
+        }
+
+        getRandomInt(parameters) {
+            let {min, max} = parameters;
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
 	update() {
+
+	    //FPS counter
+	    this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
 
 	    //Move layers at different speeds
 	    this.back.tilePosition.x -= 0.1;
@@ -103,13 +146,27 @@ class Main extends Phaser.State {
 	    if (this.man.position.x < (this.game.width - (this.game.width + this.man.width)))
 	        this.man.position.x = this.game.width;
 
+        if (this.game.scale.isFullScreen)
+        {
+            this.game.debug.text('ESC to leave fullscreen', this.world.centerX, 16);
+        }
+        else
+        {
+            this.game.debug.text('Click to go fullscreen', this.world.centerX, 16);
+        }
+
 	    //Rain toggle
-        if (this.controls.key1.isDown)
-            this.weather.emitter.on = false;// & this.weather.removeFog();
-        if (this.controls.key2.isDown)
-            this.weather.emitter.on = true;// & this.weather.addFog();
+
+        //if (this.controls.key1.isDown)
+        //     this.weather.emitter.on = false;// & this.weather.removeFog();
+        //if (this.controls.key2.isDown)
+        //     this.weather.emitter.on = true;// & this.weather.addFog();
         //if (this.weather.emitter.on = false && this.controls.key1.isUp) this.weather.emitter.on = true;
 
+        //ROBERT
+        // if(this.controls.key1.isDown) {
+        //     this.weather.emitter.on = !this.weather.emitter.on;
+        // }
     }
 
 }
