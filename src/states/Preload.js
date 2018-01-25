@@ -11,7 +11,7 @@ class Preload extends Phaser.State {
         this.game.load.image('mid1', 'assets/ilu_01.png');
         this.game.load.image('man', 'assets/ilu_man.png');
         this.game.load.image('sun', 'assets/sun.png');
-        this.game.load.image('moon', 'assets/blood_moon.png');
+        this.game.load.image('moon', 'assets/moon.png');
     }
 
     create() {

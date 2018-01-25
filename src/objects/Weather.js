@@ -31,7 +31,7 @@ class Weather {
 
         let snowParticle = this.game.add.bitmapData(15, 15);
 
-        snowParticle.circle(0, 0, 15, 'rgb(255,255,255)');
+        snowParticle.circle(7, 7, 7, 'rgb(255,255,255)');
 
         this.emitter = this.game.add.emitter(this.game.world.centerX, -300, 400);
 
