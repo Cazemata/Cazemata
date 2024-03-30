@@ -105,9 +105,9 @@ body {
 
     .page {
         grid-template: 50px minmax(400px, auto) 75px 50px / repeat(6, 1fr);
-        grid-template-areas: "t t t t t t"
-        "l c c c c r"
-        "b b b b b b"
+        grid-r"
+        "b b b b btemplate-areas: "t t t t t t"
+        "l c c c c  b"
         "h h h h h h"
     }
 

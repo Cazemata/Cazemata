@@ -1,6 +1,6 @@
 //import ExampleObject from 'objects/ExampleObject';
-import DayCycle from 'objects/DayCycle';
-import Weather from 'objects/Weather';
+import DayCycle from './../objects/DayCycle.js';
+import Weather from './../objects/Weather.js';
 
 class Main extends Phaser.State {
 	create() {
